@@ -1,0 +1,6 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/cloudfeaster/.github/blob/main/SECURITY.md
+    about: Please don't report security vulnerabilities in public issues. Use the repository's Security tab → Report a vulnerability, as described here.
