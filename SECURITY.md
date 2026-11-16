@@ -12,4 +12,4 @@ Report it privately instead:
 1. Click **Report a vulnerability**.
 1. Describe the problem: what's affected (repository, file, version or commit), how to reproduce it, and what an attacker could do with it.
 
-This opens a private security advisory that only you and the repository's maintainers can see. If a repository doesn't show **Report a vulnerability** (for example, a private repository), email [security@cloudfeaster.com](mailto:security@cloudfeaster.com) instead of opening an issue.
+This opens a private security advisory that only you and the repository's maintainers can see. If a repository doesn't show **Report a vulnerability**, email [security@cloudfeaster.com](mailto:security@cloudfeaster.com) instead of opening an issue.
