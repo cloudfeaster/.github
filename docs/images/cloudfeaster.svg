@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="50 225 1140 855">
+<title>Cloudfeaster logo</title><desc>Bold charcoal cloud outline, Joyful Orange circle inside left, centered purple curved swipe near cloud top.</desc>
+<g id="cloudfeaster-mark">
+  <path d="M 396 544
+    C 405 428 491 342 603 342
+    C 718 342 801 429 805 544
+    C 930 540 1044 624 1044 750
+    C 1044 866 961 944 853 944
+    L 372 944
+    C 262 944 177 862 177 750
+    C 177 624 271 540 396 544 Z"
+    fill="none" stroke="#171717" stroke-width="80" stroke-linejoin="round" stroke-linecap="round" />
+  <circle cx="396" cy="739" r="93" fill="#FA9335" />
+  <path d="M 477 469
+    C 537 404 653 399 718 472
+    C 730 486 716 504 701 492
+    C 639 444 560 444 499 494
+    C 480 507 465 489 477 469 Z" fill="#A844BE" />
+</g></svg>
