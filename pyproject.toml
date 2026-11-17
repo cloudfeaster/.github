@@ -16,8 +16,8 @@ required-version = ">=0.13.5"
 exclude-newer = "7 days"
 
 [tool.uv.sources]
-# Pinned to a commit while jetstream has no releases; later, a vX.Y.Z tag.
-cloudfeaster-jetstream = { git = "https://github.com/cloudfeaster/jetstream", rev = "377284013be03e9b1c34f75bfde54d4bae8b6a7d" }
+# Pinned to a release tag, which Dependabot bumps.
+cloudfeaster-jetstream = { git = "https://github.com/cloudfeaster/jetstream", tag = "v0.1.0" }
 
 [tool.jetstream]
 packs = ["core"]
