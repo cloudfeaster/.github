@@ -1,0 +1,26 @@
+[project]
+name = "cloudfeaster-github"
+version = "0.0.0"
+description = "The cloudfeaster GitHub organization's profile and default community health files"
+requires-python = "==3.13.*"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "cloudfeaster-jetstream[core]",
+]
+
+[tool.uv]
+package = false  # not a Python package: uv only manages the dev environment
+required-version = ">=0.13.5"
+exclude-newer = "7 days"
+
+[tool.uv.sources]
+# Pinned to a commit while jetstream has no releases; later, a vX.Y.Z tag.
+cloudfeaster-jetstream = { git = "https://github.com/cloudfeaster/jetstream", rev = "377284013be03e9b1c34f75bfde54d4bae8b6a7d" }
+
+[tool.jetstream]
+packs = ["core"]
+
+[tool.pytest.ini_options]
+markers = ["integration: slow tests that run-unit-tests.sh leaves out"]
