@@ -16,7 +16,7 @@ required-version = ">=0.13.5"
 exclude-newer = "7 days"
 
 [tool.uv.sources]
-# Pinned to a release tag, which Dependabot bumps.
+# Pinned to a release tag, which the jetstream-update workflow bumps.
 cloudfeaster-jetstream = { git = "https://github.com/cloudfeaster/jetstream", tag = "v0.6.0" }
 
 [tool.jetstream]
