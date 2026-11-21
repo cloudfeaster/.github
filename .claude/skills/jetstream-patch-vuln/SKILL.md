@@ -1,6 +1,6 @@
 ---
 name: jetstream-patch-vuln
-description: Review and resolve one vulnerability from a dependency scan - trivy, or a pack's scanner such as pip-audit - that is newly failing, or whose temporary exception has expired or is about to. Works out who owns the vulnerable package (jetstream's tools or the repo's own dependencies), then fixes it, adds a dated exception, or says the fix belongs in jetstream; then verifies, commits and opens a pull request. Use when the user says things like "review CVE-...", "patch CVE-...", "trivy failed", "nightly SCA failed", when the trivy or another scan hook blocks a commit, or when .trivyignore or .jetstream/trivyignore needs attention.
+description: Review and resolve one vulnerability from a dependency scan - trivy, or a pack's scanner such as pip-audit - that is newly failing, or whose temporary exception has expired or is about to. Works out who owns the vulnerable package (jetstream's tools or the repo's own dependencies), then fixes it, adds a dated exception, or says the fix belongs in jetstream; then verifies, commits and opens a pull request. Use when the user says things like "review CVE-...", "patch CVE-...", "trivy failed", "nightly SCA failed", when the trivy or another scan hook blocks a commit, or when .trivyignore, .jetstream/trivyignore or a pack's ignore file such as .pip-audit-ignore needs attention.
 ---
 
 # Patch a vulnerability
@@ -85,4 +85,4 @@ Both must pass. If a dependency's version changed, run every pack's scanner agai
 
 Commit with a message such as `fix: review CVE-2026-12345` or `fix: upgrade foo for CVE-2026-12345`. Show the user the diff, and ask before pushing and opening the pull request. Then follow `/jetstream-ship`: wait for `jetstream lint`, and merge only after the user's go-ahead.
 
-**In jetstream**, a `fix:` commit makes the next release a patch release. Every repo's scan clears once it takes that release. A new pin or floor reaches a repo through Dependabot's bump, which re-locks `uv.lock`. A changed `.jetstream/trivyignore` is an owned file, so that bump also needs `jetstream sync`'s changes (dev-workflow.md "Taking a jetstream release").
+**In jetstream**, a `fix:` commit makes the next release a patch release. Every repo's scan clears once it takes that release. A new pin or floor, or a changed `.jetstream/trivyignore`, reaches a repo through the pull request `jetstream-update.yaml` opens, which re-locks `uv.lock` and runs `jetstream sync` (dev-workflow.md "Taking a jetstream release").
