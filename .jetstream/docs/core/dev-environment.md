@@ -53,7 +53,7 @@ The pre-commit hooks, which CI also runs (`pre-commit run --all-files`), all cal
 | `check-svg` | diagrams match their D2 sources ([diagrams.md](diagrams.md)) |
 | `gitleaks` | no secrets in the git history; a false positive goes in `.gitleaksignore` |
 | `trivy` | no known vulnerabilities in the lockfiles (see [Vulnerabilities](#vulnerabilities)) |
-| `unit-tests` | the repo's tests pass (pytest, leaving out those marked `integration`) |
+| `unit-tests` | the repo's tests pass (pytest, leaving out those marked `integration`); with the python pack, under coverage too (see its `python.md`) |
 
 To run them all, as CI does:
 
@@ -62,6 +62,8 @@ pre-commit run --all-files
 ```
 
 A repo can't add hooks. It adds a check by adding a test, which the `unit-tests` hook runs.
+
+A slow test, such as one that needs the network, is marked `@pytest.mark.integration`. No hook runs those: the `jetstream-lint.yaml` workflow runs them after the hooks, with `run-integration-tests.sh`, which you can also run yourself.
 
 ## Vulnerabilities
 
@@ -73,5 +75,9 @@ A finding is fixed by whoever owns the vulnerable package. `uv tree --invert --p
 - **The repo's own dependencies need it**: the repo upgrades or pins them, or, if no fixed version can be used yet, adds a temporary exception to `.trivyignore`.
 
 An exception expires 7 days out, so it's reviewed again: `CVE-2026-12345 exp:2026-12-01  # why, and when to look again`.
+
+Dependabot doesn't read the exception files, so the `jetstream-sync-dependabot-alerts.yaml` workflow dismisses the alerts for accepted vulnerabilities, and reopens them once their exceptions go. It runs as a GitHub App, which an org owner sets up once: see [dependabot-alerts.md](dependabot-alerts.md).
+
+The nightly `jetstream-prune-trivyignore.yaml` workflow fails, naming the exception, once trivy no longer finds what an exception in `.trivyignore` is for, so it's removed rather than left until its date (`run-prune-trivyignore.sh`).
 
 In Claude Code, `/jetstream-patch-vuln <ID>` works through a finding this way.
