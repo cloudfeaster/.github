@@ -52,12 +52,12 @@ dev = [
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "cloudfeaster-jetstream", extras = ["core"], git = "https://github.com/cloudfeaster/jetstream?tag=v0.6.0" }]
+dev = [{ name = "cloudfeaster-jetstream", extras = ["core"], git = "https://github.com/cloudfeaster/jetstream?tag=v0.9.0" }]
 
 [[package]]
 name = "cloudfeaster-jetstream"
-version = "0.6.0"
-source = { git = "https://github.com/cloudfeaster/jetstream?tag=v0.6.0#8020dd93779ecf5b7a045baed8dd3f9a9b3052a3" }
+version = "0.9.0"
+source = { git = "https://github.com/cloudfeaster/jetstream?tag=v0.9.0#b5b0bf834eda8eaa8c4247da65330c9506edea97" }
 dependencies = [
     { name = "tomlkit" },
 ]
