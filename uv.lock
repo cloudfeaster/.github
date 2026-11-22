@@ -52,7 +52,7 @@ dev = [
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "cloudfeaster-jetstream", extras = ["core"], git = "https://github.com/cloudfeaster/jetstream?tag=v0.9.0" }]
+dev = [{ name = "cloudfeaster-jetstream", extras = ["core", "public"], git = "https://github.com/cloudfeaster/jetstream?tag=v0.9.0" }]
 
 [[package]]
 name = "cloudfeaster-jetstream"
