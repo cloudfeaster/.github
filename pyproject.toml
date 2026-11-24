@@ -7,7 +7,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-    "cloudfeaster-jetstream[core,public]",
+    "cloudfeaster-jetstream[core]",
 ]
 
 [tool.uv]
@@ -20,7 +20,7 @@ exclude-newer = "7 days"
 cloudfeaster-jetstream = { git = "https://github.com/cloudfeaster/jetstream", tag = "v0.12.0" }
 
 [tool.jetstream]
-packs = ["core", "public"]
+packs = ["core"]
 
 [tool.pytest.ini_options]
 markers = ["integration: slow tests that run-unit-tests.sh leaves out"]
