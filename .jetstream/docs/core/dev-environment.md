@@ -19,7 +19,7 @@ source cfg4dev.sh
 1. runs `pre-commit install`, for the `pre-commit` git hook;
 1. sources `cfg4dev.local.sh`, if the repo has one, for the repo's own setup.
 
-Run it again whenever you like; it only changes what's out of date. In VS Code, every new terminal runs it for you (`.vscode/terminal-init.sh`). CI doesn't use it: the `jetstream-lint.yaml` workflow runs `uv sync --locked` itself.
+If `uv sync` fails, it skips the rest; if another step fails, the rest still run. Either way, it returns 1. Run it again whenever you like; it only changes what's out of date. In VS Code, every new terminal runs it for you (`.vscode/terminal-init.sh`). CI doesn't use it: the `jetstream-lint.yaml` workflow runs `uv sync --locked` itself.
 
 ## jetstream sync and jetstream check
 
@@ -34,7 +34,7 @@ To change one of those files, change it in jetstream, then bump the repo's jetst
 | **Owned by jetstream** | `cfg4dev.sh`, `.pre-commit-config.yaml`, the tool configs (`mado.toml`, `.yamllint`, `.shellcheckrc`, `.trivy.yaml`, `.jsonlintignore`), `.vscode/`'s `settings.json`, `terminal-init.sh` and `.gitignore`, `.claude/settings.json`, `.claude/skills/jetstream-*/`, `.github/dependabot.yml`, `.github/workflows/jetstream-*.yaml`, `.jetstream/docs/` and `.jetstream/trivyignore` | jetstream; `sync` writes them, `check` enforces them |
 | **Owned by the repo** | `cfg4dev.local.sh`, `.trivyignore`, `.gitleaksignore`, `CONTRIBUTING.md`, `CLAUDE.md`, and the repo's own workflows | the repo |
 | **A jetstream block in a repo's file** | `.gitignore`, between `# >>> jetstream` and `# <<< jetstream` | jetstream inside the block, the repo outside it |
-| **Both set values** | `pyproject.toml` | jetstream sets certain keys, such as `requires-python` and `[tool.uv] exclude-newer`, and the repo owns every other key, including keys it adds to jetstream's tables |
+| **Both set values** | `pyproject.toml` | jetstream sets certain keys, such as `requires-python` and `[tool.uv] exclude-newer`, and the repo owns every other key, including keys it adds to jetstream's tables; `sync` deletes a key or table jetstream used to set and no longer does, such as a tool's table once jetstream stops running the tool |
 
 jetstream owns `.github/workflows/jetstream-*.yaml`, `.claude/skills/jetstream-*/` and `.jetstream/docs/` outright: `sync` deletes any file there that the release doesn't write. The repo's own Claude Code skills go in `.claude/skills/` under any other name.
 
@@ -63,7 +63,7 @@ pre-commit run --all-files
 
 A repo can't add hooks. It adds a check by adding a test, which the `unit-tests` hook runs.
 
-A slow test, such as one that needs the network, is marked `@pytest.mark.integration`. No hook runs those: the `jetstream-lint.yaml` workflow runs them after the hooks, with `run-integration-tests.sh`, which you can also run yourself.
+A slow test, such as one that needs the network, is marked `@pytest.mark.integration`. No hook runs those: the `jetstream-lint.yaml` workflow runs them after the hooks, with `run-integration-tests.sh`, which you can also run yourself. Then it builds what each pack builds, and checks the result, such as the python pack's wheel and the website pack's site (see each pack's docs), since `jetstream lint` is the one check a pull request must pass.
 
 ## Vulnerabilities
 
